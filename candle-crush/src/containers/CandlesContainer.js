@@ -8,6 +8,7 @@ const CandlesContainer = ({candles}) => {
   }
 
   return (
+    
     <div className='candles-container'>
       {renderCandles()}
     </div>
