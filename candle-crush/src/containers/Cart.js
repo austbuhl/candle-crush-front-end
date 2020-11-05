@@ -1,8 +1,10 @@
 import React from 'react'
 import CartItem from '../components/CartItem'
 import Checkout from '../components/Checkout'
+import {Route, Redirect, useHistory} from 'react-router-dom'
 
 const Cart = ({cart, checkoutHandler}) => {
+  let history = useHistory()
 
   const renderCartItems = () => {
     return cart.map((item, index) => <CartItem key={index} item={item}/>)
@@ -13,6 +15,12 @@ const Cart = ({cart, checkoutHandler}) => {
 
     return cart.map((item) => item.price)
   }
+
+  const checkoutButton = () => {
+    history.push('/checkout')
+  }
+
+  
 
   
   return (
@@ -34,8 +42,10 @@ const Cart = ({cart, checkoutHandler}) => {
           </tr>
         </tbody>
       </table>
+      <button onClick={checkoutButton}>Go to Checkout</button>
       
-      <Checkout checkoutHandler={checkoutHandler}/>
+        
+      
     </>
   )
 
