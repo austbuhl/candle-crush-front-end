@@ -45,3 +45,12 @@
   display: flex;
   flex-flow: wrap;
 }
+
+.filters-container {
+  margin-right: 250px;
+  width: 20%;
+}
+
+.radio-button {
+  justify-content: space-around;
+}
