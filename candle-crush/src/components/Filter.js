@@ -12,8 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 
 const Filter = props => {
-  console.log(props)
-
   return (
 
     

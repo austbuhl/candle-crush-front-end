@@ -1,6 +1,7 @@
 import React from 'react'
 import CandlesContainer from './CandlesContainer'
 import FilterContainer from './FilterContainer'
+import Cart from './Cart'
 
 class Main extends React.Component {
 
@@ -8,7 +9,8 @@ state={
   candles: [],
   searchValue: "",
   filterValue: "highLow",
-  filterScent: "good smell"
+  filterScent: "good smell",
+  cart: []
 }
 
 componentDidMount() {
@@ -16,7 +18,6 @@ componentDidMount() {
     .then(resp => resp.json())
     .then(candles => this.setState({candles}))
 }
-
 
 searchBarHandler = (e) => {
   this.setState({
@@ -38,11 +39,8 @@ filterCandles = () => {
   return filteredCandles.sort((a, b) => {
     return a.price - b.price
   })
-
-  
 }
 }
-  
 
 
 filterPrice = (e) => {
@@ -58,17 +56,34 @@ filterScent = (e) => {
   })
 }
 
+addToCart = candleObj => {
+  let updatedCart = [...this.state.cart, candleObj]
+  this.setState({
+    cart: updatedCart
+  })
+}
+
+checkoutHandler = () => {
+  fetch('http://localhost:3000/purchases', {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      accepts: "application/json"
+    },
+    body: JSON.stringify({user_id: 1, candle: this.state.cart})
+  })
+}
 
 
 render(){
-  console.log(this.state.filterValue)
-  console.log(this.state.searchValue)
+  console.log(this.state.cart)
   
   
   return (
     <div className="main-container" >
       <FilterContainer scent={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
-      <CandlesContainer candles={this.filterCandles()} />
+      <CandlesContainer clickHandler={this.addToCart} candles={this.filterCandles()} />
+      <Cart cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
     </div>
   ) 
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import Candle from '../components/Candle'
 
-const CandlesContainer = ({candles}) => {
+const CandlesContainer = ({candles, clickHandler}) => {
 
   const renderCandles = () => {
-    return candles.map(candle => <Candle key={candle.id} candle={candle} />)
+    return candles.map(candle => <Candle key={candle.id} candle={candle} clickHandler={clickHandler} />)
   }
 
   return (

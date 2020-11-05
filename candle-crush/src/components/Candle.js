@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const Candle = ({candle}) => {
+const Candle = ({candle, clickHandler}) => {
   
   const useStyles = makeStyles({
     root: {
@@ -21,6 +21,11 @@ const Candle = ({candle}) => {
   });
 
   const classes = useStyles()
+
+  const localClickHandler = () => {
+    clickHandler(candle)
+  }
+
 
   return(
     
@@ -44,8 +49,8 @@ const Candle = ({candle}) => {
       </CardContent>
     </CardActionArea>
     <CardActions>
-      <Button size="small" color="primary">
-        Share
+      <Button size="small" color="primary" onClick={localClickHandler}>
+        Add to Cart
       </Button>
       <Button size="small" color="primary">
         Learn More
