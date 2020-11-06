@@ -7,13 +7,36 @@ import {withRouter, BrowserRouter} from 'react-router-dom'
 
 class App extends React.Component {
   state = {
-    currentUser: {},
+    currentUser: null,
     username: "",
     password: ""
   }
 
-   
-  
+  componentDidMount() {
+    const token = localStorage.getItem('token')
+    if(token) {
+      fetch('http://localhost:3000/api/v1/users', {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}`}
+      })
+        .then(resp => resp.json())
+        .then(data => {
+          this.setState({
+            currentUser: data.user
+          })
+        })
+    }
+  }
+
+
+  logoutHandler = () => {
+    console.log('loggin out...')
+    localStorage.removeItem('token')
+    this.setState({
+      currentUser: null
+    })
+  }
+
   inputChangeHandler = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -23,7 +46,6 @@ class App extends React.Component {
   loginSubmit = (e) => {
 
     e.preventDefault()
-   
     
     let userObj = {
       username: this.state.username,
@@ -57,17 +79,13 @@ class App extends React.Component {
 
     })
   }
-    
-
-
-
   
   render() {
     console.log(this.state)
     return (
       
         <div className="App">
-          <NavBar/>
+          <NavBar currentUser={this.state.currentUser} logoutHandler={this.logoutHandler} />
           <Main loginSubmit={this.loginSubmit} loginInputHandler={this.inputChangeHandler} username={this.state.username} password={this.state.password}/>
       
       
