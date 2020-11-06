@@ -1,9 +1,9 @@
 import React from 'react'
 import CartItem from '../components/CartItem'
 import Checkout from '../components/Checkout'
-import {Route, Redirect, useHistory} from 'react-router-dom'
+import {Route, Redirect, useHistory, Switch} from 'react-router-dom'
 
-const Cart = ({cart, checkoutHandler}) => {
+const Cart = ({cart, currentUser, checkoutHandler}) => {
   let history = useHistory()
 
   const renderCartItems = () => {
@@ -17,39 +17,61 @@ const Cart = ({cart, checkoutHandler}) => {
   }
 
   const checkoutButton = () => {
-    history.push('/checkout')
+    
+    if (currentUser) {
+        history.push('/checkout')
+    } else {
+      history.push('/login')
+    }
   }
 
-  
-
-  
   return (
-    <>
+    
+      <>
       <table>
-        <thead>
-          <th>Name</th>
-          <th>QTY</th>
-          <th>Price</th>
-          <th>$ Total</th>
-        </thead>
-        <tbody>
-          {renderCartItems()}
-          <tr>
-            <td></td>
-            <td>Total QTY: {cart.length}</td>
-            <td></td>
-            <td>{cartTotals().reduce((tot, accum) => tot + accum)}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button onClick={checkoutButton}>Go to Checkout</button>
+    <thead>
+      <th>Name</th>
+      <th>QTY</th>
+      <th>Price</th>
+      <th>$ Total</th>
+    </thead>
+    <tbody>
+      {renderCartItems()}
+      <tr>
+        <td></td>
+        <td>Total QTY: {cart.length}</td>
+        <td></td>
+        <td>{cartTotals().reduce((tot, accum) => tot + accum)}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button onClick={checkoutButton}>Go to Checkout</button>
+  </>
+  )
+}
+export default Cart
+    
+     
+
+    
+      
+    
+   
+  
+      
       
         
+    
       
-    </>
-  )
+    
+      
+      
+      
 
-}
+      
+      
 
-export default Cart
+    
+      
+
 
