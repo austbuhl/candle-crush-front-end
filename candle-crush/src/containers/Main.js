@@ -14,7 +14,7 @@ state={
   filterValue: "highLow",
   filterScent: "good smell",
   cart: [],
-  currentUser: {}
+  
 }
 
 componentDidMount() {
@@ -68,14 +68,17 @@ addToCart = candleObj => {
 }
 
 checkoutHandler = () => {
+  
   fetch('http://localhost:3000/api/v1/purchases', {
     method: "POST",
     headers: {
+
       "content-type": "application/json",
       accepts: "application/json"
+      
     },
-    body: JSON.stringify({user_id: 1, candle: this.state.cart})
-  })
+    body: JSON.stringify({user: this.props.currentUser.id, candle: this.state.cart})
+  }).then(resp => resp.json()).then(data => console.log(data))
 }
 
 
@@ -94,13 +97,13 @@ render(){
       </Route>
       
       <Route path='/cart'>
-      <Cart cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
+      <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
       </Route>
 
       <Route path='/checkout'>
-      <Checkout cart={this.state.cart}/>
+        <Checkout currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
       </Route>
-
+      
       <Route path='/login'>
         <Login loginSubmit={this.props.loginSubmit} loginInputHandler={this.props.loginInputHandler} username={this.props.username} password={this.props.password} />
       </Route>

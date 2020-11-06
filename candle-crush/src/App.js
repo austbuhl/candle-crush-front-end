@@ -86,7 +86,7 @@ class App extends React.Component {
       
         <div className="App">
           <NavBar currentUser={this.state.currentUser} logoutHandler={this.logoutHandler} />
-          <Main loginSubmit={this.loginSubmit} loginInputHandler={this.inputChangeHandler} username={this.state.username} password={this.state.password}/>
+          <Main currentUser={this.state.currentUser} loginSubmit={this.loginSubmit} loginInputHandler={this.inputChangeHandler} username={this.state.username} password={this.state.password}/>
       
       
         </div>
