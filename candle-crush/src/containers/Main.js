@@ -3,6 +3,7 @@ import CandlesContainer from './CandlesContainer'
 import FilterContainer from './FilterContainer'
 import Checkout from '../components/Checkout'
 import Cart from './Cart'
+import Login from '../components/Login'
 import {Route, Switch} from 'react-router-dom'
 
 class Main extends React.Component {
@@ -17,7 +18,7 @@ state={
 }
 
 componentDidMount() {
-  fetch('http://localhost:3000/candles')
+  fetch('http://localhost:3000/api/v1/candles')
     .then(resp => resp.json())
     .then(candles => this.setState({candles}))
 }
@@ -67,7 +68,7 @@ addToCart = candleObj => {
 }
 
 checkoutHandler = () => {
-  fetch('http://localhost:3000/purchases', {
+  fetch('http://localhost:3000/api/v1/purchases', {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -98,6 +99,10 @@ render(){
 
       <Route path='/checkout'>
       <Checkout cart={this.state.cart}/>
+      </Route>
+
+      <Route path='/login'>
+        <Login loginSubmit={this.props.loginSubmit} loginInputHandler={this.props.loginInputHandler} username={this.props.username} password={this.props.password} />
       </Route>
 
       
