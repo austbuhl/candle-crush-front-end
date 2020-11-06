@@ -83,9 +83,6 @@ checkoutHandler = () => {
 
 
 render(){
-  console.log(this.state.cart)
-  
-  
   return (
 
     <div className="main-container" >
@@ -97,7 +94,7 @@ render(){
       </Route>
       
       <Route path='/cart'>
-      <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
+      <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler} addToCart={this.addToCart}/>
       </Route>
 
       <Route path='/checkout'>
