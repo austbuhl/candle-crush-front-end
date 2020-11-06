@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import {NavLink} from 'react-router-dom'
 
 const Candle = ({candle, clickHandler}) => {
   
@@ -28,7 +29,7 @@ const Candle = ({candle, clickHandler}) => {
 
 
   return(
-    
+    <NavLink to={`/candles/${candle.id}`}>
     <Card className={classes.root}>
     <CardActionArea>
       <CardMedia
@@ -48,7 +49,9 @@ const Candle = ({candle, clickHandler}) => {
         </Typography>
       </CardContent>
     </CardActionArea>
+    
     <CardActions>
+    
       <Button size="small" color="primary" onClick={localClickHandler}>
         Add to Cart
       </Button>
@@ -57,6 +60,8 @@ const Candle = ({candle, clickHandler}) => {
       </Button>
     </CardActions>
   </Card>
+  </NavLink>
+  
   )
   // return (<h1>{candle.name}</h1>)
 }

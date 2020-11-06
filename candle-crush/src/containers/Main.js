@@ -86,18 +86,20 @@ render(){
 
     <div className="main-container" >
       <Switch>
+      
       <Route path='/candles' >
       <FilterContainer scent={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
       <CandlesContainer clickHandler={this.addToCart} candles={this.filterCandles()} />
       </Route>
+      
       <Route path='/cart'>
-
       <Cart cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
       </Route>
+
       <Route path='/checkout'>
-        <Checkout cart={this.state.cart}/>
-        
+      <Checkout cart={this.state.cart}/>
       </Route>
+
       
       </Switch>
     </div>

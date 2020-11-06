@@ -10,6 +10,13 @@ let totalPrice = itemsWithPrice.reduce((total, accumulator) => total + accumulat
 
     <form>
       <input type="text" label="streetAddress" name="address"></input>
+      <input type="text" label="town" name="town"></input>
+      <input type="text" label="town" name="town"></input>
+      <select>
+        
+      </select>
+      <input type="text" label="zipcode" name="town"></input>
+      <input type="text" label="town" name="town"></input>
     </form>
     <button onClick={props.checkoutHandler}>Checkout</button>
     </>
