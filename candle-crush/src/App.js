@@ -9,7 +9,8 @@ class App extends React.Component {
   state = {
     currentUser: null,
     username: "",
-    password: ""
+    password: "",
+    user_type: "basic"
   }
 
   componentDidMount() {
@@ -38,6 +39,7 @@ class App extends React.Component {
   }
 
   inputChangeHandler = (e) => {
+    
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -79,13 +81,58 @@ class App extends React.Component {
 
     })
   }
+
+  signupSubmit = (e) => {
+    e.preventDefault()
+
+    let userObj = { 
+      
+      user: {
+
+      username: this.state.username,
+      password: this.state.password,
+      user_type: this.state.user_type
+    }
+    
+  }
+
+    let config = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(userObj)
+    }
+
+    fetch('http://localhost:3000/api/v1/users', config).then(resp => resp.json()).
+    then(data => {
+      localStorage.setItem("token", data.jwt)
+
+      this.setState({
+        username: "",
+        password: "",
+        currentUser: data.user
+        
+      }, () => {
+        this.props.history.push('/candles')
+      })
+
+    })
+
+  }
+  
+  
+    
+  
   
   render() {
+    console.log(this.state)
     return (
       
         <div className="App">
           <NavBar currentUser={this.state.currentUser} logoutHandler={this.logoutHandler} />
-          <Main currentUser={this.state.currentUser} loginSubmit={this.loginSubmit} loginInputHandler={this.inputChangeHandler} username={this.state.username} password={this.state.password}/>
+          <Main currentUser={this.state.currentUser} loginSubmit={this.loginSubmit} signupSubmit={this.signupSubmit} inputHandler={this.inputChangeHandler} username={this.state.username} password={this.state.password} user_type={this.state.user_type} />
       
       
         </div>

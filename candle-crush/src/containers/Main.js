@@ -4,6 +4,7 @@ import FilterContainer from './FilterContainer'
 import Checkout from '../components/Checkout'
 import Cart from './Cart'
 import Login from '../components/Login'
+import Signup from '../components/Signup'
 import {Route, Switch} from 'react-router-dom'
 
 class Main extends React.Component {
@@ -82,6 +83,7 @@ checkoutHandler = () => {
 }
 
 
+
 render(){
   console.log(this.state.cart)
   return (
@@ -103,10 +105,15 @@ render(){
       </Route>
       
       <Route path='/login'>
-        <Login loginSubmit={this.props.loginSubmit} loginInputHandler={this.props.loginInputHandler} username={this.props.username} password={this.props.password} />
+        <Login loginSubmit={this.props.loginSubmit} inputHandler={this.props.inputHandler} username={this.props.username} password={this.props.password} />
       </Route>
 
+      <Route path='/signup' >
+        <Signup inputHandler= {this.props.inputHandler} signupSubmit={this.props.signupSubmit} username={this.props.username} password={this.props.password} user_type={this.props.user_type}/>
+        </Route>
+        
       
+
       </Switch>
     </div>
   ) 
