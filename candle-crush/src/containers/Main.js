@@ -4,8 +4,10 @@ import FilterContainer from './FilterContainer'
 import Checkout from '../components/Checkout'
 import Cart from './Cart'
 import Login from '../components/Login'
+import Profile from '../components/Profile'
 import Signup from '../components/Signup'
-import {Route, Switch} from 'react-router-dom'
+import CreateCandle from '../components/CreateCandle'
+import {Route, Switch, withRouter} from 'react-router-dom'
 
 class Main extends React.Component {
 
@@ -15,7 +17,11 @@ state={
   filterValue: "highLow",
   filterScent: "good smell",
   cart: [],
-  
+  name: "",
+  price: "",
+  image: "",
+  description: "",
+  scent: ""
 }
 
 componentDidMount() {
@@ -46,7 +52,6 @@ filterCandles = () => {
   })
 }
 }
-
 
 filterPrice = (e) => {
   console.log(e.target)
@@ -82,37 +87,79 @@ checkoutHandler = () => {
   }).then(resp => resp.json()).then(data => console.log(data))
 }
 
+candleChangeHandler = e => {
+  this.setState({
+    [e.target.name]: e.target.value
+  })
+}
+
+createCandle = e => {
+  e.preventDefault()
+
+  let candleObj = {
+    candle: {
+      name: this.state.name,
+      price: this.state.price,
+      image: this.state.image,
+      description: this.state.description,
+      scent: this.state.scent
+    }
+  }
+
+  fetch('http://localhost:3000/api/v1/candles', {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      accepts: "application/json"
+    },
+    body: JSON.stringify(candleObj)
+  })
+    .then(resp => resp.json())
+    .then(newCandle => {
+      let updatedCandles = [...this.state.candles, newCandle]
+      this.setState({
+        candles: updatedCandles
+      }, () => {
+        this.props.history.push('/candles')
+      })
+    })
+
+}
 
 
 render(){
-  console.log(this.state.cart)
   return (
-
     <div className="main-container" >
       <Switch>
-      
-      <Route path='/candles' >
-      <FilterContainer scent={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
-      <CandlesContainer clickHandler={this.addToCart} candles={this.filterCandles()} />
-      </Route>
-      
-      <Route path='/cart'>
-      <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler} addToCart={this.addToCart}/>
-      </Route>
+        
+        <Route path='/candles/create'>
+          <CreateCandle name={this.state.name} price={this.state.price} description={this.state.description} image={this.state.image} scent={this.state.scent} changeHandler={this.candleChangeHandler} submitHandler={this.createCandle}/>
+        </Route>
 
-      <Route path='/checkout'>
-        <Checkout currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
-      </Route>
-      
-      <Route path='/login'>
-        <Login loginSubmit={this.props.loginSubmit} inputHandler={this.props.inputHandler} username={this.props.username} password={this.props.password} />
-      </Route>
-
-      <Route path='/signup' >
-        <Signup inputHandler= {this.props.inputHandler} signupSubmit={this.props.signupSubmit} username={this.props.username} password={this.props.password} user_type={this.props.user_type}/>
+        <Route path='/candles' >
+          <FilterContainer scent={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
+          <CandlesContainer clickHandler={this.addToCart} candles={this.filterCandles()} />
         </Route>
         
-      
+        <Route path='/cart'>
+          <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler} addToCart={this.addToCart}/>
+        </Route>
+
+        <Route path='/checkout'>
+          <Checkout currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
+        </Route>
+        
+        <Route path='/login'>
+          <Login loginSubmit={this.props.loginSubmit} inputHandler={this.props.inputHandler} username={this.props.username} password={this.props.password} />
+        </Route>
+
+        <Route path='/signup' >
+          <Signup inputHandler= {this.props.inputHandler} signupSubmit={this.props.signupSubmit} username={this.props.username} password={this.props.password} user_type={this.props.user_type}/>
+        </Route>
+
+        <Route path='/profile'>
+          <Profile purchases={this.props.purchases} currentUser={this.props.currentUser}/>
+        </Route>
 
       </Switch>
     </div>
@@ -120,4 +167,4 @@ render(){
 }
 }
 
-export default Main
+export default withRouter(Main)

@@ -18,10 +18,23 @@ const Cart = ({cart, currentUser, addToCart}) => {
   //   }, [])
   // }
 
+  let cartCopy = cart.map((item) => ({...item, qty: 0}))
+    
+  const updatedCart = cartCopy.map(item => {
+    if(cartCopy.includes(item)) {
+      let foundItem = cartCopy.find(el => el.id === item.id)
+      foundItem.qty++
+      return foundItem
+    } else {
+      return item
+      
+      
+    }
+  })
+
+  const filteredCart = updatedCart.filter((a, b) => updatedCart.indexOf(a) === b)
+
   const renderCartItems = () => {
-  
-
-
     return filteredCart.map((item, index) => <CartItem key={index} item={item} addToCart={addToCart} />)
   }
   
@@ -39,43 +52,6 @@ const Cart = ({cart, currentUser, addToCart}) => {
       history.push('/login')
     }
   }
-  
-  
-
-  
-
-  
-
-
-
-
-
-
-  
-    
-    let cartCopy = cart.map((item) => ({...item, qty: 0}))
-    
-    const updatedCart = cartCopy.map(item => {
-    if(cartCopy.includes(item)) {
-      let foundItem = cartCopy.find(el => el.id === item.id)
-      foundItem.qty++
-      return foundItem
-    } else {
-      return item
-      
-      
-    }
-  })
-  const filteredCart = updatedCart.filter((a, b) => updatedCart.indexOf(a) === b)
-    
- 
-
-  
-
-  
-    
-  
-  
 
   return (
       <>
