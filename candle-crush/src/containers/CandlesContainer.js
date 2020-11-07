@@ -28,7 +28,7 @@ const CandlesContainer = ({candles, clickHandler}) => {
       
       <Route path="/candles" render={() => {
         return (
-          <div className='candles-container'>
+          <div id='candles-container'>
             {renderCandles()}
           </div> 
         )

@@ -6,7 +6,7 @@ const FilterContainer = props => {
 
   
   return (
-    <div className="filters-container">
+    <div id="filters-container">
       <Search searchHandler={props.searchHandler} searchValue={props.searchValue}/>
       <Filter scent={props.scent} filterScent={props.filterScent} filterValue={props.filterValue} filterPrice={props.filterPrice}/>
     </div>

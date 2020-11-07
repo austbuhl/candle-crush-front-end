@@ -37,20 +37,48 @@
   }
 }
 
-.main-container {
+#main-container {
   display: flex;
 }
 
-.candles-container {
+#candles-container {
   display: flex;
   flex-flow: wrap;
 }
 
-.filters-container {
-  margin-right: 250px;
-  width: 20%;
+#candles-container a {
+  text-decoration: none;
+}
+
+.candle-card {
+  max-height: 350px;
+  max-width: 250px;
+}
+
+#filters-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1em;
 }
 
 .radio-button {
   justify-content: space-around;
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(42, 43, 44);
+  font-size: 1.5em;;
+}
+
+#navbar a{
+  color: white;
+  text-align: center;
+  padding: 1em;
+  text-decoration: none;
+}
+
+#navbar a:hover {
+  background-color: black;
 }
