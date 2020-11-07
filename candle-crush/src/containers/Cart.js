@@ -1,13 +1,13 @@
 import React from 'react'
 import CartItem from '../components/CartItem'
-import Checkout from '../components/Checkout'
 import {Route, Redirect, useHistory, Switch} from 'react-router-dom'
+
 
 const Cart = ({cart, currentUser, checkoutHandler}) => {
   let history = useHistory()
 
   const renderCartItems = () => {
-    return cart.map((item, index) => <CartItem key={index} item={item}/>)
+    return cart.map((item, index) => <CartItem delete={null} add={this.props.add} count={filterAmount} key={index} item={item}/>)
   }
   
   const cartTotals = () => {
@@ -15,6 +15,16 @@ const Cart = ({cart, currentUser, checkoutHandler}) => {
 
     return cart.map((item) => item.price)
   }
+
+  const filterAmount = (id) => {
+    let items = cart.map(x => {x.id === id})
+    return items.size
+
+  }
+
+  
+
+  
 
   const checkoutButton = () => {
     

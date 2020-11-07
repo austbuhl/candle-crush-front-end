@@ -97,7 +97,7 @@ render(){
       </Route>
       
       <Route path='/cart'>
-      <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler}/>
+      <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler} add={this.addToCart}/>
       </Route>
 
       <Route path='/checkout'>
