@@ -83,6 +83,7 @@ checkoutHandler = () => {
 
 
 render(){
+  console.log(this.state.cart)
   return (
 
     <div className="main-container" >
