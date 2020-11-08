@@ -22,13 +22,6 @@ const NavBar = (props) => {
       <div id="navbar">
         <NavLink to='/candles' >Products</NavLink>
 
-
-        {props.currentUser === null ?
-          <NavLink to='/signup'>Sign Up</NavLink>
-          : 
-          null
-        }
-
         {props.currentUser === null ? null : 
           props.currentUser.user_type === 'vendor' ? 
             <NavLink to='/candles/create'>Create a Candle</NavLink> 
@@ -41,6 +34,13 @@ const NavBar = (props) => {
         <NavLink to='/profile'>
           <AccountCircleIcon />
         </NavLink>
+
+        {props.currentUser === null ?
+          <NavLink to='/signup'>Sign Up</NavLink>
+          : 
+          null
+        }
+
         {props.currentUser === null ? 
           <NavLink to='/login'>Login</NavLink>
           : 
