@@ -8,10 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom'
 
@@ -95,21 +91,6 @@ const Login = (props) => {
             onChange={props.inputHandler} 
             value={props.password}
           />
-          <FormControl className={classes.formControl}>
-            <InputLabel id="select-user-type">User Type</InputLabel>
-            <Select
-              labelId="select-user-type"
-              id="demo-simple-select"
-              name="user_type"
-              required
-              fullWidth
-              value={props.user_type}
-              onChange={props.inputHandler}
-            >
-              <MenuItem value="basic">Basic</MenuItem>
-              <MenuItem value="vendor">Vendor</MenuItem>
-            </Select>
-          </FormControl>
           <Button
             type="submit"
             fullWidth
@@ -117,7 +98,7 @@ const Login = (props) => {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Login
           </Button>
           <Grid container>
             <Grid item xs>
