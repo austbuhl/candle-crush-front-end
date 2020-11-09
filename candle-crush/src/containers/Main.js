@@ -142,7 +142,7 @@ render(){
 
         <Route path='/candles' >
           <FilterContainer scent={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
-          <CandlesContainer clickHandler={this.addToCart} candles={this.filterCandles()} />
+          <CandlesContainer currentUser={this.props.currentUser} clickHandler={this.addToCart} candles={this.filterCandles()} />
         </Route>
         
         <Route path='/cart'>

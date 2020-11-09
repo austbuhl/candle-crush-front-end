@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import {NavLink} from 'react-router-dom'
 
-const Candle = ({candle, clickHandler, selectCandle}) => {
+const Candle = ({candle, clickHandler}) => {
   
   const useStyles = makeStyles({
     root: {
@@ -26,50 +26,44 @@ const Candle = ({candle, clickHandler, selectCandle}) => {
 
   const addToCartHandler = () => {
     clickHandler(candle)
-    
   }
-
-  const passSelectedCandle = () => {
-    selectCandle(candle)
-  }
-
-  
-
 
 
   return(
-    <NavLink className="candle-card" to={`/candles/${candle.id}`} >
-      <Card className={classes.root} onClick={passSelectedCandle} >
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={candle.image}
-            title={candle.name}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {candle.name}
-            </Typography>
-            <Typography gutterBottom variant="h6" component="h2">
-              { `$${candle.price} - ${candle.scent}`}
-            </Typography>
-            {/* <Typography variant="body2" color="textSecondary" component="p">
-              {candle.description}
-            </Typography> */}
-          </CardContent>
-        </CardActionArea>
+    
+    <Card className={classes.root} >
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={candle.image}
+          title={candle.name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {candle.name}
+          </Typography>
+          <Typography gutterBottom variant="h6" component="h2">
+            { `$${candle.price} - ${candle.scent}`}
+          </Typography>
+          {/* <Typography variant="body2" color="textSecondary" component="p">
+            {candle.description}
+          </Typography> */}
+        </CardContent>
+      </CardActionArea>
 
-        <Divider />
-        <CardActions>
-          <Button size="small" color="primary" onClick={addToCartHandler}>
-            Add to Cart
-          </Button>
+      <Divider />
+      <CardActions>
+        <Button size="small" color="primary" onClick={addToCartHandler}>
+          Add to Cart
+        </Button>
+        <NavLink className="candle-card" to={`/candles/${candle.id}`} >
           <Button size="small" color="primary">
             Learn More
           </Button>
-        </CardActions>
-      </Card>
-    </NavLink>
+        </NavLink>
+      </CardActions>
+    </Card>
+  
   
   )
   // return (<h1>{candle.name}</h1>)
