@@ -129,7 +129,7 @@ createCandle = e => {
 
 render(){
   return (
-    <div className="main-container" >
+    <div id="main-container" >
       <Switch>
         
         <Route path='/candles/create'>

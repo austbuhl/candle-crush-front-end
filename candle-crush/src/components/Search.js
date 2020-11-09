@@ -5,7 +5,6 @@ const Search = (props) => {
   return (
     <TextField id="standard-basic" name="searchValue" label="Search" value={props.searchValue} onChange={props.searchHandler}/>
     )
-
 } 
   
 
