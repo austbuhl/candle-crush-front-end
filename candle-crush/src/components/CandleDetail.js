@@ -30,6 +30,16 @@ class CandleDetail extends React.Component {
       }))
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.rating !== this.state.rating) {
+      fetch(`http://localhost:3000/api/v1/candles/${this.props.candle.id}`)
+      .then(resp => resp.json())
+      .then(data => this.setState({
+        reviews: data.reviews
+      }))
+    }
+  }
+
   reviewChangeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -60,11 +70,15 @@ class CandleDetail extends React.Component {
       .then(newReview => {
         let updatedReviews = [...this.state.reviews, newReview]
         this.setState({
-          reviews: updatedReviews,
+          // reviews: updatedReviews,
           rating: "",
           review: ""
         })
       })
+  }
+  
+  renderScents = () => {
+    return this.props.candle.scents.map(scent => <span>{`${scent.scent} `}</span>)
   }
 
   render() {
@@ -73,7 +87,7 @@ class CandleDetail extends React.Component {
           <h1>{this.props.candle.name}</h1>
           <img src={this.props.candle.image}/>
           <p> Bio: {this.props.candle.description}</p>
-          <p>Scent Profile : {this.props.candle.scent}</p>
+          <p>Scent Profile : {this.renderScents()}</p>
           <p>Price : ${this.props.candle.price}</p>
           <p>Left in Stock : {this.props.candle.quantity}</p>
           <button onClick={this.addToCartHandler}> Add to Cart</button>

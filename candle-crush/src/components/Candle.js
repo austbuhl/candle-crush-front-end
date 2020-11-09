@@ -28,6 +28,9 @@ const Candle = ({candle, clickHandler}) => {
     clickHandler(candle)
   }
 
+  const renderScents = () => {
+    return candle.scents.map(scent => <span>{`${scent.scent} `}</span>)
+  }
 
   return(
     
@@ -43,11 +46,11 @@ const Candle = ({candle, clickHandler}) => {
             {candle.name}
           </Typography>
           <Typography gutterBottom variant="h6" component="h2">
-            { `$${candle.price} - ${candle.scent}`}
+            { `$${candle.price}`}
           </Typography>
-          {/* <Typography variant="body2" color="textSecondary" component="p">
-            {candle.description}
-          </Typography> */}
+          <Typography variant="body2" color="textSecondary" component="p">
+            Scents: {renderScents()}
+          </Typography>
         </CardContent>
       </CardActionArea>
 
