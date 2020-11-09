@@ -1,6 +1,6 @@
 import React from 'react'
 import Candle from '../components/Candle'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, withRouter} from 'react-router-dom'
 import CandleDetail from '../components/CandleDetail'
 
 const CandlesContainer = props => {
@@ -40,4 +40,4 @@ const CandlesContainer = props => {
 
 }
 
-export default CandlesContainer
+export default withRouter(CandlesContainer)
