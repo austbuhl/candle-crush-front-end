@@ -126,6 +126,10 @@ createCandle = e => {
 
 }
 
+candleClickHandler = (obj) => {
+
+}  
+
 
 render(){
   return (

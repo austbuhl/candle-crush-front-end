@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import {NavLink} from 'react-router-dom'
 
-const Candle = ({candle, clickHandler}) => {
+const Candle = ({candle, clickHandler, selectCandle}) => {
   
   const useStyles = makeStyles({
     root: {
@@ -24,14 +24,22 @@ const Candle = ({candle, clickHandler}) => {
 
   const classes = useStyles()
 
-  const localClickHandler = () => {
+  const addToCartHandler = () => {
     clickHandler(candle)
+    
   }
+
+  const passSelectedCandle = () => {
+    selectCandle(candle)
+  }
+
+  
+
 
 
   return(
-    <NavLink className="candle-card" to={`/candles/${candle.id}`}>
-      <Card className={classes.root} >
+    <NavLink className="candle-card" to={`/candles/${candle.id}`} >
+      <Card className={classes.root} onClick={passSelectedCandle} >
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -53,7 +61,7 @@ const Candle = ({candle, clickHandler}) => {
 
         <Divider />
         <CardActions>
-          <Button size="small" color="primary" onClick={localClickHandler}>
+          <Button size="small" color="primary" onClick={addToCartHandler}>
             Add to Cart
           </Button>
           <Button size="small" color="primary">
