@@ -10,7 +10,8 @@ class App extends React.Component {
     username: "",
     password: "",
     user_type: "basic",
-    purchases: ""
+    
+    
   }
 
   componentDidMount() {
@@ -28,7 +29,7 @@ class App extends React.Component {
       .then(data => {
         this.setState({
           currentUser: data.user,
-          purchases: data.purchases
+          
         })
       })
     }

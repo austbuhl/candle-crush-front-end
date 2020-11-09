@@ -9,9 +9,10 @@ import Signup from '../components/Signup'
 import CreateCandle from '../components/CreateCandle'
 import {Route, Switch, withRouter} from 'react-router-dom'
 
+
 class Main extends React.Component {
 
-state={
+state = {
   candles: [],
   searchValue: "",
   filterValue: "highLow",
@@ -74,13 +75,15 @@ addToCart = candleObj => {
 }
 
 checkoutHandler = () => {
+  const token = localStorage.getItem('token')
   
   fetch('http://localhost:3000/api/v1/purchases', {
     method: "POST",
     headers: {
 
       "content-type": "application/json",
-      accepts: "application/json"
+      Authorization: `Bearer ${token}`
+      
       
     },
     body: JSON.stringify({user: this.props.currentUser.id, candle: this.state.cart})
@@ -105,11 +108,12 @@ createCandle = e => {
       scent: this.state.scent
     }
   }
-
+  const token = localStorage.getItem('token')
   fetch('http://localhost:3000/api/v1/candles', {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      Authorization: `bearer ${token}`,
       accepts: "application/json"
     },
     body: JSON.stringify(candleObj)
@@ -126,12 +130,11 @@ createCandle = e => {
 
 }
 
-candleClickHandler = (obj) => {
 
-}  
 
 
 render(){
+  
   return (
     <div id="main-container" >
       <Switch>

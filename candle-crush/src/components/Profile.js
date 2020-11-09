@@ -1,18 +1,21 @@
 import React from 'react'
+import Purchases from './Purchases'
+import { render } from 'react-dom'
 
-const Profile = props => {
+const Profile = (props) =>  {
 
-  const renderPurchases = () => {
-    return props.purchases.map(purchase => <li>{purchase.name}</li>)
-  }
-
+  
+  
+  
   return (
     <div>
       <h1>Profile Page</h1>
       <span>{props.currentUser.username}</span>
-      <ul>
-        {renderPurchases()}
-      </ul>
+      
+        {<Purchases />}
+      
+      
+      
     </div>
   )
 }
