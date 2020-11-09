@@ -13,7 +13,7 @@ class CandleDetail extends React.Component {
 
     return this.state.reviews.map(review => {
         return (
-            <li>{review.rating} : {review.review}</li>
+            <li> {review.user.username} --- {review.rating} : {review.review}</li>
           )
         })
   }
@@ -72,9 +72,10 @@ class CandleDetail extends React.Component {
       <div>
           <h1>{this.props.candle.name}</h1>
           <img src={this.props.candle.image}/>
-          <p> {this.props.candle.description}</p>
-          <p>{this.props.candle.scent}</p>
-          <p>{this.props.candle.price}</p>
+          <p> Bio: {this.props.candle.description}</p>
+          <p>Scent Profile : {this.props.candle.scent}</p>
+          <p>Price : ${this.props.candle.price}</p>
+          <p>Left in Stock : {this.props.candle.quantity}</p>
           <button onClick={this.addToCartHandler}> Add to Cart</button>
           <h4>Reviews</h4>
           <ul>
