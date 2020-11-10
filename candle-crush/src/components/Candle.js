@@ -29,7 +29,7 @@ const Candle = ({candle, clickHandler}) => {
   }
 
   const renderScents = () => {
-    return candle.scents.map(scent => <span>{`${scent.scent} `}</span>)
+    return candle.scents.map(scent => <span>{`${scent} `}</span>)
   }
 
   return(

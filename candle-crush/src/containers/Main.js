@@ -10,13 +10,14 @@ import CreateCandle from '../components/CreateCandle'
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
 
 
+
 class Main extends React.Component {
 
   state = {
     candles: [],
     searchValue: "",
     filterValue: "highLow",
-    filterScent: "good smell",
+    filterScent: "",
     cart: [],
     name: "",
     price: "",
@@ -44,32 +45,52 @@ class Main extends React.Component {
     let indexOfLastCandle = this.state.currentPage * this.state.candlesPerPage
     let indexOfFirstCandle = indexOfLastCandle - this.state.candlesPerPage
     let candlesList = this.state.candles.slice(indexOfFirstCandle, indexOfLastCandle)
-
-    // let candlesList = this.state.candles
     let filteredCandles = candlesList.filter(candle => {return candle.name.includes(this.state.searchValue)})
+
+    
+    
+    let filterCandlesScent = (this.state.filterScent === "" ? filteredCandles : filteredCandles.filter(candle => { return candle.scents.includes(this.state.filterScent)}))
+   
+    console.log(filterCandlesScent)
+  
+    
+    
+   
+  
     
     if (this.state.filterValue === "highLow") {
-      return filteredCandles.sort((a, b) => {
+      return filterCandlesScent.sort((a, b) => {
         return b.price - a.price
       })
     } else {
-      return filteredCandles.sort((a, b) => {
+      return filterCandlesScent.sort((a, b) => {
         return a.price - b.price
       })
     }
   }
 
   filterPrice = (e) => {
-    console.log(e.target)
+    
     this.setState({
       filterValue: e.target.value
     })
   }
 
-  filterScent = (e) => {
+
+
+  filterScent = (e, value) => {
+   
+
     this.setState({
-      filterScent: e.target.value
+      filterScent: value
     })
+    
+    
+        
+      
+   
+    
+    
   }
 
   addToCart = candleObj => {
@@ -160,12 +181,7 @@ class Main extends React.Component {
       
     }
     
-    // componentDidUpdate(prevProps, prevState) {
-    //   if(this.state.candles !== prevState.candles) {
-    //     this.props.history.push(`/candles`)
-    //   }
-      
-    // }
+   
 
   paginate = (event, value) => {
     this.setState({
@@ -175,6 +191,7 @@ class Main extends React.Component {
   
 
   render(){
+  
     return (
       <div id="main-container" >
         <Switch>
@@ -184,7 +201,7 @@ class Main extends React.Component {
           </Route>
 
           <Route path='/candles' >
-            <FilterContainer scent={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
+            <FilterContainer candles={this.state.candles} scentValue={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
             <CandlesContainer currentUser={this.props.currentUser} clickHandler={this.addToCart} candles={this.filterCandles()} paginate={this.paginate} />
           </Route>
           
