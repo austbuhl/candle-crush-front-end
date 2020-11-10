@@ -1,6 +1,9 @@
 import React from 'react'
 import Purchases from './Purchases'
-import { render } from 'react-dom'
+import List from '@material-ui/core/List';
+
+import Grid from '@material-ui/core/Grid'
+
 
 const Profile = (props) =>  {
 
@@ -8,15 +11,17 @@ const Profile = (props) =>  {
   
   
   return (
-    <div>
-      <h1>Profile Page</h1>
-      <span>{props.currentUser.username}</span>
+    <Grid container justify='center'>
+      <div>
+        <h1>Profile Page</h1>
+        <h4>{props.currentUser.username}</h4>
+          
+          <List>
+            {<Purchases />}
+          </List>
       
-        {<Purchases />}
-      
-      
-      
-    </div>
+      </div>
+    </Grid>
   )
 }
 

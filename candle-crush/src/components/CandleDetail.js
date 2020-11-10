@@ -70,14 +70,8 @@ class CandleDetail extends React.Component {
       let average = ratings / this.state.reviews.length
       return average.toFixed(1)
     }
-      
-      
-      
-      
-   
-  
-  
-  
+
+
   reviewChangeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -144,10 +138,8 @@ class CandleDetail extends React.Component {
           <Button variant="contained" color="primary" onClick={this.addToCartHandler}>Add to Cart</Button>
         </Grid>
     </Grid>
-          
-          
           <h4>Reviews</h4>
-    <h4>Average Rating : {this.getAggregateReview()}</h4>
+          <h4>Average Rating : {this.getAggregateReview() === 'NaN' ? 0 : this.getAggregateReview()}</h4>
           <List>
               {this.renderReviews()}
           </List>

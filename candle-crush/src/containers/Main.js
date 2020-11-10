@@ -100,11 +100,9 @@ class Main extends React.Component {
     fetch('http://localhost:3000/api/v1/purchases', {
       method: "POST",
       headers: {
-
         "content-type": "application/json",
+        accepts: "application/json",
         Authorization: `Bearer ${token}`
-        
-        
       },
       body: JSON.stringify({user: this.props.currentUser.id, candle: this.state.cart})
     }).then(resp => resp.json()).then(data => console.log(data))
