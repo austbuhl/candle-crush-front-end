@@ -2,7 +2,7 @@ import React from 'react'
 import CartItem from '../components/CartItem'
 import { useHistory } from 'react-router-dom'
 
-const Cart = ({cart, currentUser, addToCart}) => {
+const Cart = ({cart, currentUser, addToCart, removeFromCart}) => {
   let history = useHistory()
 
   // const groupBy = (array, property) => {
@@ -32,10 +32,12 @@ const Cart = ({cart, currentUser, addToCart}) => {
     }
   })
 
+
+
   const filteredCart = updatedCart.filter((a, b) => updatedCart.indexOf(a) === b)
 
   const renderCartItems = () => {
-    return filteredCart.map((item, index) => <CartItem key={index} item={item} addToCart={addToCart} />)
+    return filteredCart.map((item, index) => <CartItem key={index} item={item} removeFromCart={removeFromCart} addToCart={addToCart} />)
   }
   
   const cartTotals = () => {
@@ -60,8 +62,10 @@ const Cart = ({cart, currentUser, addToCart}) => {
       <th>Name</th>
       <th>QTY</th>
       <th>Add</th>
+      <th>Remove</th>
       <th>Price</th>
       <th>$ Total</th>
+
     </thead>
     <tbody>
       {renderCartItems()}
@@ -70,7 +74,9 @@ const Cart = ({cart, currentUser, addToCart}) => {
         <td>{cart.length}</td>
         <td></td>
         <td></td>
+        <td></td>
         <td>{cartTotals().reduce((tot, accum) => tot + accum)}</td>
+
       </tr>
     </tbody>
   </table>

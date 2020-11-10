@@ -7,7 +7,7 @@ import Login from '../components/Login'
 import Profile from '../components/Profile'
 import Signup from '../components/Signup'
 import CreateCandle from '../components/CreateCandle'
-import {Route, Switch, withRouter} from 'react-router-dom'
+import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
 
 
 class Main extends React.Component {
@@ -22,7 +22,8 @@ state = {
   price: "",
   image: "",
   description: "",
-  scent: ""
+  scent: "",
+  quantity: ""
 }
 
 componentDidMount() {
@@ -74,6 +75,17 @@ addToCart = candleObj => {
   })
 }
 
+removeFromCart = candleObj => {
+  let foundItem = this.state.cart.find(obj => obj.id === candleObj.id)
+  let cartItem = this.state.cart.indexOf(foundItem)
+  this.state.cart.splice(cartItem, 1)
+  let updatedCart = [...this.state.cart]
+  this.setState({
+    cart: updatedCart
+  })
+  
+}
+
 checkoutHandler = () => {
   const token = localStorage.getItem('token')
   
@@ -105,7 +117,9 @@ createCandle = e => {
       price: this.state.price,
       image: this.state.image,
       description: this.state.description,
-      scent: this.state.scent
+      scent: this.state.scent,
+      quantity: this.state.quantity,
+      starting_inv: this.state.quantity
     }
   }
   const token = localStorage.getItem('token')
@@ -122,19 +136,36 @@ createCandle = e => {
     .then(newCandle => {
       let updatedCandles = [...this.state.candles, newCandle]
       this.setState({
-        candles: updatedCandles
+        candles: updatedCandles,
+        name: "",
+        price: "",
+        image: "",
+        description: "",
+        scent: "",
+        quantity: ""
+
       }, () => {
-        this.props.history.push('/candles')
+        // this.props.history.push(`/candles/${newCandle.id}`)
+        this.props.history.location
+        
+        // <Redirect from='/candles/create' to='/candles' />
       })
     })
 
-}
-
+    
+  }
+  
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(this.state.candles !== prevState.candles) {
+  //     this.props.history.push(`/candles`)
+  //   }
+    
+  // }
 
 
 
 render(){
-  
+  console.log(this.state.cart)
   return (
     <div id="main-container" >
       <Switch>
@@ -149,7 +180,7 @@ render(){
         </Route>
         
         <Route path='/cart'>
-          <Cart currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler} addToCart={this.addToCart}/>
+          <Cart removeFromCart={this.removeFromCart} currentUser={this.props.currentUser} cart={this.state.cart} checkoutHandler={this.checkoutHandler} addToCart={this.addToCart}/>
         </Route>
 
         <Route path='/checkout'>

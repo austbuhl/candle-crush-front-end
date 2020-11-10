@@ -17,17 +17,18 @@ const NavBar = (props) => {
   // </Toolbar>
 // </AppBar>
 
+console.log(props.currentUser)
 
     return(
       <div id="navbar">
         <NavLink to='/candles' >Products</NavLink>
 
-        {/* {props.currentUser === null ? null : 
+        {props.currentUser === null ? null : 
           props.currentUser.user_type === 'vendor' ? 
             <NavLink to='/candles/create'>Create a Candle</NavLink> 
             :
             null
-        } */}
+        }
         <NavLink to='/cart'>
           <ShoppingCartIcon />
         </NavLink>

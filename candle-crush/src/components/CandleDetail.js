@@ -1,4 +1,6 @@
 import React from 'react'
+import {withRouter, BrowserHistory} from 'react-router-dom'
+
 import CreateReview from './CreateReview'
 
 class CandleDetail extends React.Component {
@@ -82,6 +84,7 @@ class CandleDetail extends React.Component {
   }
 
   render() {
+      console.log(this.props)
     return (
       <div>
           <h1>{this.props.candle.name}</h1>
@@ -104,4 +107,4 @@ class CandleDetail extends React.Component {
 
 
 
-export default CandleDetail
+export default withRouter(CandleDetail)
