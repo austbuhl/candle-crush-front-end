@@ -1,5 +1,6 @@
 import React from 'react'
 import Candle from '../components/Candle'
+import Pagination from '@material-ui/lab/Pagination';
 import {Route, Switch, withRouter} from 'react-router-dom'
 import CandleDetail from '../components/CandleDetail'
 
@@ -30,6 +31,7 @@ const CandlesContainer = props => {
       return (
         <div id='candles-container'>
           {renderCandles()}
+          <Pagination onClick={props.paginate} count={10} color="primary"/>
         </div> 
       )
     }}
