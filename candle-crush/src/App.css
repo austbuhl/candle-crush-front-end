@@ -55,6 +55,12 @@
   max-width: 250px;
 }
 
+.candle-img {
+  width: 225px;
+  height: 250px;
+  justify-content: left;
+}
+
 #filters-container {
   display: flex;
   flex-direction: column;

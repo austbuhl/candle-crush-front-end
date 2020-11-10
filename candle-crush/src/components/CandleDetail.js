@@ -1,5 +1,14 @@
 import React from 'react'
 import {withRouter, BrowserHistory} from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import Rating from '@material-ui/lab/Rating'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+
+
 
 import CreateReview from './CreateReview'
 
@@ -15,7 +24,18 @@ class CandleDetail extends React.Component {
 
     return this.state.reviews.map(review => {
         return (
-            <li> {review.user.username} --- {review.rating} : {review.review}</li>
+            <ListItem >
+                <ListItemText
+                primary={review.user.username}
+                secondary={review.rating} 
+                >
+                </ListItemText>
+                    <Divider variant="inset" component="li"/>
+                <ListItemText
+                primary={review.review}
+                >
+                </ListItemText>
+            </ListItem> 
           )
         })
   }
@@ -42,6 +62,22 @@ class CandleDetail extends React.Component {
     }
   }
 
+  getAggregateReview = () => {
+      let ratings = this.state.reviews.map(review => review.rating).reduce((total, accumulator) => {
+          return total + accumulator
+      }, 0)
+
+      let average = ratings / this.state.reviews.length
+      return average.toFixed(1)
+    }
+      
+      
+      
+      
+   
+  
+  
+  
   reviewChangeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -84,20 +120,37 @@ class CandleDetail extends React.Component {
   }
 
   render() {
-      console.log(this.props)
+      console.log(this.state)
     return (
       <div>
+        <Grid container justify='flex-start'>
+
+            <Grid item xs={3}>
+
           <h1>{this.props.candle.name}</h1>
-          <img src={this.props.candle.image}/>
-          <p> Bio: {this.props.candle.description}</p>
-          <p>Scent Profile : {this.renderScents()}</p>
-          <p>Price : ${this.props.candle.price}</p>
-          <p>Left in Stock : {this.props.candle.quantity}</p>
-          <button onClick={this.addToCartHandler}> Add to Cart</button>
+          <img className='candle-img' src={this.props.candle.image}/>
+            </Grid>
+
+            
+            <Grid item xs={9} spacing={5}>
+                <h4>Bio </h4>
+          <p> {this.props.candle.description}</p>
+          <h4>Scent Profile </h4>
+          <p>{this.renderScents()}</p>
+          <h4>Price</h4>
+          <p> $ {this.props.candle.price}</p>
+          <h4>Left in Stock</h4>
+          <p>{this.props.candle.quantity}</p>
+          <Button variant="contained" color="primary" onClick={this.addToCartHandler}>Add to Cart</Button>
+        </Grid>
+    </Grid>
+          
+          
           <h4>Reviews</h4>
-          <ul>
+    <h4>Average Rating : {this.getAggregateReview()}</h4>
+          <List>
               {this.renderReviews()}
-          </ul>
+          </List>
           <CreateReview changeHandler={this.reviewChangeHandler} submitHandler={this.submitReview} ratingValue={this.state.rating} reviewValue={this.state.review}/>
       </div>
     )

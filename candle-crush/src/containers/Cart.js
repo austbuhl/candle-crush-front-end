@@ -1,6 +1,14 @@
 import React from 'react'
 import CartItem from '../components/CartItem'
 import { useHistory } from 'react-router-dom'
+import List from '@material-ui/core/List';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider'
+import Button from '@material-ui/core/Button'
+import ListItem from '@material-ui/core/ListItem';
+import Grid from '@material-ui/core/Grid'
+
+
 
 const Cart = ({cart, currentUser, addToCart, removeFromCart}) => {
   let history = useHistory()
@@ -57,30 +65,58 @@ const Cart = ({cart, currentUser, addToCart, removeFromCart}) => {
 
   return (
       <>
-      <table>
-    <thead>
-      <th>Name</th>
-      <th>QTY</th>
-      <th>Add</th>
-      <th>Remove</th>
-      <th>Price</th>
-      <th>$ Total</th>
+        
+    <Grid container justify='center' spacing={2} alignContent='space-around'>
 
-    </thead>
-    <tbody>
-      {renderCartItems()}
-      <tr>
-        <td></td>
-        <td>{cart.length}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>{cartTotals().reduce((tot, accum) => tot + accum)}</td>
+      <List>
+      
 
-      </tr>
-    </tbody>
-  </table>
-  <button onClick={checkoutButton}>Go to Checkout</button>
+<ListItem alignItems="flex-start">
+        
+        <ListItemText
+          primary="Item Name"
+          >
+         
+        </ListItemText>
+        <Divider variant="inset" component="li"/>
+        <ListItemText
+          primary= {'\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + 'Quantity'}
+          ></ListItemText>
+        <Divider variant="inset" component="li"/>
+        <ListItemText
+          primary="Price"
+          ></ListItemText>
+          <Divider variant="inset" component="li"/>
+          <ListItemText
+            primary= "Total"
+            
+            ></ListItemText>
+        <Divider variant="inset" component="li"/>
+        </ListItem>
+    {renderCartItems()}
+       <Button fullWidth variant="contained" color="primary" onClick={checkoutButton}>Go to Checkout</Button>
+  </List>
+  </Grid>
+          
+        
+         
+        
+          
+        
+        
+        
+          
+
+
+          
+          
+        
+        
+        
+        
+        
+        
+
   </>
   )
 }
