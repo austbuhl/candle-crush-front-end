@@ -2,6 +2,7 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Badge } from '@material-ui/core';
 
 const NavBar = (props) => {
 
@@ -30,7 +31,9 @@ console.log(props.currentUser)
             null
         }
         <NavLink to='/cart'>
-          <ShoppingCartIcon />
+          <Badge badgeContent={props.cartLength} color="secondary">
+            <ShoppingCartIcon />
+          </Badge>
         </NavLink>
         <NavLink to='/profile'>
           <AccountCircleIcon />

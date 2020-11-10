@@ -51,14 +51,12 @@ class Main extends React.Component {
     if (this.state.filterValue === "highLow") {
       return filteredCandles.sort((a, b) => {
         return b.price - a.price
-    })
-
-    
-  } else {
-    return filteredCandles.sort((a, b) => {
-      return a.price - b.price
-    })
-  }
+      })
+    } else {
+      return filteredCandles.sort((a, b) => {
+        return a.price - b.price
+      })
+    }
   }
 
   filterPrice = (e) => {
@@ -79,6 +77,7 @@ class Main extends React.Component {
     this.setState({
       cart: updatedCart
     })
+    this.props.updateCartLength(updatedCart.length)
   }
 
   removeFromCart = candleObj => {
@@ -89,7 +88,7 @@ class Main extends React.Component {
     this.setState({
       cart: updatedCart
     })
-    
+    this.props.updateCartLength(updatedCart.length)
   }
 
   checkoutHandler = () => {
@@ -168,15 +167,14 @@ class Main extends React.Component {
       
     // }
 
-  paginate = (e) => {
-    console.log(e.target.innerText)
+  paginate = (event, value) => {
     this.setState({
-      currentPage: e.target.innerText
+        currentPage: value
     })
   }
+  
 
   render(){
-    console.log(this.state.cart)
     return (
       <div id="main-container" >
         <Switch>

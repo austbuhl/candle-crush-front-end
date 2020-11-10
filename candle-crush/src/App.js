@@ -10,8 +10,7 @@ class App extends React.Component {
     username: "",
     password: "",
     user_type: "basic",
-    
-    
+    cartLength: 0
   }
 
   componentDidMount() {
@@ -114,12 +113,18 @@ class App extends React.Component {
       })
     })
   } 
+
+  updateCartLength = (newLength) => {
+    this.setState({
+      cartLength: newLength
+    })
+  }
   
   render() {
     return (
       
         <div className="App">
-          <NavBar currentUser={this.state.currentUser} logoutHandler={this.logoutHandler} />
+          <NavBar currentUser={this.state.currentUser} logoutHandler={this.logoutHandler} cartLength={this.state.cartLength}/>
           <Main 
             currentUser={this.state.currentUser} 
             loginSubmit={this.loginSubmit} 
@@ -129,6 +134,7 @@ class App extends React.Component {
             password={this.state.password} 
             user_type={this.state.user_type} 
             purchases={this.state.purchases}
+            updateCartLength={this.updateCartLength}
           />
         </div>
     
