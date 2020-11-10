@@ -80,7 +80,7 @@ class CandleDetail extends React.Component {
   }
   
   renderScents = () => {
-    return this.props.candle.scents.map(scent => <span>{`${scent.scent} `}</span>)
+    return this.props.candle.scents.map(scent => <span>{`${scent} `}</span>)
   }
 
   render() {

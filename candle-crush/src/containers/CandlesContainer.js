@@ -16,12 +16,15 @@ const CandlesContainer = props => {
       <Route path='/candles/:id' render={(routerProps) => {
           let candle;
           if (props.candles.length > 0) {
+            console.log(props.candles)
             let id = parseInt(routerProps.match.params.id)
             candle = props.candles.find(item => item.id === id)
+            console.log(candle)
           } 
+      
           return (
             <div>
-              {<CandleDetail currentUser={props.currentUser} candle={candle} clickHandler={props.clickHandler} />}
+              {candle ? <CandleDetail currentUser={props.currentUser} candle={candle} clickHandler={props.clickHandler} /> : <h1>Loading</h1>}
             </div>
           )
         }}
