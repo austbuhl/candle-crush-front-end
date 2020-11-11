@@ -46,6 +46,10 @@
   flex-flow: wrap;
 }
 
+.create-candle-divider {
+  margin-top: auto;
+}
+
 #candles-container a {
   text-decoration: none;
 }
@@ -64,11 +68,18 @@
 #filters-container {
   display: flex;
   flex-direction: column;
-  margin-right: 1em;
+  margin-right: 2em;
+  height: 500px;
+  justify-content: space-evenly;
+  margin-left: 2em;
 }
 
 .radio-button {
   justify-content: space-around;
+}
+
+#scent-check{
+  margin-top: 2em;
 }
 
 #navbar {
@@ -88,3 +99,28 @@
 #navbar a:hover {
   background-color: black;
 }
+
+#reviews-list {
+  width: 1000px;
+  margin-left: 17em;
+  margin-top: 5em;
+  border: 1px solid rgba(156, 146, 146, 1);
+  border-radius: 1%;
+  justify-content: space-between;
+}
+
+.review-tile {
+  /* border: 1px solid skyblue */
+  border-top: 1px solid slategrey;
+  overflow-wrap: break-word;
+
+}
+
+.review-text {
+  align-self: flex-end;
+}
+
+.rating-box {
+  border: 1px solid rgba(156, 146, 146, 1);
+}
+

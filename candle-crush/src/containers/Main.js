@@ -9,6 +9,7 @@ import Signup from '../components/Signup'
 import CreateCandle from '../components/CreateCandle'
 import Grid from '@material-ui/core/Grid'
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
+import { unmountComponentAtNode, render} from "react-dom"
 
 
 
@@ -43,8 +44,8 @@ class Main extends React.Component {
   }
 
   filterCandles = () => {
-    let indexOfLastCandle = this.state.currentPage * this.state.candlesPerPage
-    let indexOfFirstCandle = indexOfLastCandle - this.state.candlesPerPage
+    // let indexOfLastCandle = this.state.currentPage * this.state.candlesPerPage
+    // let indexOfFirstCandle = indexOfLastCandle - this.state.candlesPerPage
     let filteredCandles = this.state.candles.filter(candle => {return candle.name.includes(this.state.searchValue)})
 
     let filterCandlesScent = (this.state.filterScent === "" ? filteredCandles : filteredCandles.filter(candle => { return candle.scents.includes(this.state.filterScent)}))
@@ -52,11 +53,13 @@ class Main extends React.Component {
     if (this.state.filterValue === "highLow") {
       return filterCandlesScent.sort((a, b) => {
         return b.price - a.price
-      }).slice(indexOfFirstCandle, indexOfLastCandle)
+      })
+      // .slice(indexOfFirstCandle, indexOfLastCandle)
     } else {
       return filterCandlesScent.sort((a, b) => {
         return a.price - b.price
-      }).slice(indexOfFirstCandle, indexOfLastCandle)
+      })
+      // .slice(indexOfFirstCandle, indexOfLastCandle)
     }
   }
 
@@ -120,7 +123,7 @@ class Main extends React.Component {
   }
 
   createCandle = e => {
-    e.preventDefault()
+    // e.preventDefault()
 
     let candleObj = {
       candle: {
@@ -170,26 +173,34 @@ class Main extends React.Component {
         currentPage: value
     })
   }
+
+  unmountFilterContainer = () => {
+    // console.log(document.getElementById('filters-container'))
+    unmountComponentAtNode(document.getElementById('filters-container'))
+  }
   
 
   render(){
   
     return (
       <div id="main-container" >
-        <Grid container>
+        
           <Switch>
             
             <Route path='/candles/create'>
               <CreateCandle name={this.state.name} price={this.state.price} description={this.state.description} image={this.state.image} scent={this.state.scent} changeHandler={this.candleChangeHandler} submitHandler={this.createCandle}/>
             </Route>
 
+            
+
+
             <Route path='/candles' >
-              <Grid item xs={2} >
+              
                 <FilterContainer candles={this.state.candles} scentValue={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
-              </Grid>
-              <Grid item xs={10}>
-                <CandlesContainer currentUser={this.props.currentUser} clickHandler={this.addToCart} candles={this.filterCandles()} paginate={this.paginate} pages={Math.ceil(this.state.candles.length/this.state.candlesPerPage)} />
-              </Grid>
+              
+              
+                <CandlesContainer unmountFilterContainer={this.unmountFilterContainer} currentUser={this.props.currentUser} clickHandler={this.addToCart} candles={this.filterCandles()} paginate={this.paginate} pages={Math.ceil(this.state.candles.length/this.state.candlesPerPage)} />
+              
             </Route>
             
             <Route path='/cart'>
@@ -213,7 +224,7 @@ class Main extends React.Component {
             </Route>
 
           </Switch>
-        </Grid>
+        
       </div>
     ) 
   }
