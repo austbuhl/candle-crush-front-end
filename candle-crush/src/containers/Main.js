@@ -105,7 +105,13 @@ class Main extends React.Component {
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({user: this.props.currentUser.id, candle: this.state.cart})
-    }).then(resp => resp.json()).then(data => console.log(data))
+    }).then(this.setState({
+        cart: []
+      }, () => {
+        this.props.updateCartLength(0)
+        this.props.history.push('/candles') 
+      })
+    )
   }
 
   candleChangeHandler = e => {
