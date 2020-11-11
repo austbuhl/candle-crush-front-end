@@ -6,20 +6,6 @@ import { Badge } from '@material-ui/core';
 
 const NavBar = (props) => {
 
-  // <AppBar position="static">
-  // <Toolbar>
-    // <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-    //   <MenuIcon />
-    // </IconButton>
-  //   <Typography variant="h6" className={classes.title}>
-  //     News
-  //   </Typography>
-  //   <Button color="inherit">Login</Button>
-  // </Toolbar>
-// </AppBar>
-
-console.log(props.currentUser)
-
     return(
       <div id="navbar">
         <NavLink to='/candles' >Products</NavLink>
@@ -48,7 +34,7 @@ console.log(props.currentUser)
         {props.currentUser === null ? 
           <NavLink to='/login'>Login</NavLink>
           : 
-          <button onClick={props.logoutHandler}>Logout</button>
+          <a href='/' onClick={props.logoutHandler}>Logout</a>
         }
       </div>
     )

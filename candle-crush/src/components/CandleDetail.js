@@ -114,29 +114,20 @@ class CandleDetail extends React.Component {
   }
 
   render() {
-      console.log(this.state)
     return (
       <div>
         <Grid container justify='flex-start'>
-
-            <Grid item xs={3}>
-
-          <h1>{this.props.candle.name}</h1>
-          <img className='candle-img' src={this.props.candle.image}/>
-            </Grid>
-
-            
-            <Grid item xs={9} spacing={5}>
-                <h4>Bio </h4>
-          <p> {this.props.candle.description}</p>
-          <h4>Scent Profile </h4>
-          <p>{this.renderScents()}</p>
-          <h4>Price</h4>
-          <p> $ {this.props.candle.price}</p>
-          <h4>Left in Stock</h4>
-          <p>{this.props.candle.quantity}</p>
-          <Button variant="contained" color="primary" onClick={this.addToCartHandler}>Add to Cart</Button>
-        </Grid>
+          <Grid item xs={3}>
+            <h1>{this.props.candle.name}</h1>
+            <img className='candle-img' src={this.props.candle.image}/>
+          </Grid>
+          <Grid item xs={9} spacing={5}>
+            <p><strong>Bio: </strong> {this.props.candle.description}</p>
+            <p><strong>Scent Profile: </strong>{this.renderScents()}</p>
+            <p><strong>Price: </strong> $ {this.props.candle.price}</p>
+            <p><strong>Left in Stock </strong>{this.props.candle.quantity}</p>
+            <Button variant="contained" color="primary" onClick={this.addToCartHandler}>Add to Cart</Button>
+          </Grid>
         </Grid>
           <h4>Reviews</h4>
           <h4>Average Rating : {this.getAggregateReview() === 'NaN' ? 0 : this.getAggregateReview()}</h4>

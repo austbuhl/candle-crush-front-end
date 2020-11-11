@@ -14,7 +14,8 @@ const Candle = ({candle, clickHandler}) => {
   
   const useStyles = makeStyles({
     root: {
-      maxWidth: 345,
+      width: 225,
+      height: 335,
       margin: '1em'
     },
     media: {

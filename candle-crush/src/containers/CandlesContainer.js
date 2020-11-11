@@ -34,7 +34,7 @@ const CandlesContainer = props => {
       return (
         <div id='candles-container'>
           {renderCandles()}
-          <Pagination onChange={props.paginate} count={10} color="primary"/>
+          <Pagination onChange={props.paginate} count={props.pages} color="primary"/>
         </div> 
       )
     }}
