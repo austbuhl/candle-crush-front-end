@@ -11,9 +11,46 @@ import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 
 
 const CartItem = ({item, addToCart, filteredCart, removeFromCart}) => {
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      width: 600
+      
+    },
+    details: {
+      display: 'flex',
+      flexDirection: 'column',
+      
+    },
+    content: {
+      flex: '1 0 auto',
+      
+      
+    },
+    cover: {
+      width: 200,
+      marginRight: 200,
+    },
+    controls: {
+      display: 'flex',
+      alignItems: 'center',
+      paddingLeft: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+    },
+   
+  }));
+  
+  const classes = useStyles();
+  const theme = useTheme();
 
   const addClickHandler = () => {
     addToCart(item )
@@ -25,85 +62,128 @@ const CartItem = ({item, addToCart, filteredCart, removeFromCart}) => {
 
   return (
     
-    <Grid container align='center'  >
+    
 
-    <ListItem alignItems="flex-start">
-      <Grid item >
+  <Card className={classes.root}>
+        <CardMedia
+          className={classes.cover}
+          image={item.image}
+          title="Candle Image"
+        />
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Typography component="h5" variant="h5">
+            {item.name}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Total ${`${item.price * item.qty}`}
+          </Typography>
+        </CardContent>
+        <div className={classes.controls}>
+          <IconButton aria-label="previous">
+            <RemoveCircleIcon onClick={removeClickHandler}></RemoveCircleIcon>
+          </IconButton>
+         <CardContent>
+           <Typography variant='h6'>
+              Qty {item.qty}
+           </Typography>
+         </CardContent>
+          <IconButton aria-label="next">
+          <AddCircleIcon  onClick={addClickHandler}></AddCircleIcon>
+          </IconButton>
+        </div>
+      </div>
+    </Card>
 
-        <ListItemAvatar>
-          <Avatar alt="Candle Image" src={item.image} />
-        </ListItemAvatar>
-      </Grid>
-      <Grid item>
 
-        <ListItemText
+
+
+
+
+
+
+
+    
+
+    // <ListItem >
+    //   <Grid item xs={3}>
+
+    //     <ListItemAvatar>
+    //       <Avatar alt="Candle Image" src={item.image} />
+    //     </ListItemAvatar>
+        
+    //     <ListItemText
           
-          primary = {item.name}
-          disableTypography
-          >
-        </ListItemText>
-      </Grid>
-        <Divider variant="inset" component="li"/>
+    //       primary = {item.name}
+    //       disableTypography
+    //       >
+    //     </ListItemText>
+    //   </Grid>
+      
+      
+
+    //     <Divider variant="inset" component="li"/>
+        
+    //     <Grid item xs={3} >
+
+    //       <IconButton size='small' edge='end'>
+    //         <RemoveCircleIcon  onClick={removeClickHandler}></RemoveCircleIcon>
+    //       </IconButton>
+    //     <ListItemText
+    //       primary = {item.qty}
+    //       ></ListItemText>
+    //      <IconButton size='small' edge='end'>
+    //         <AddCircleIcon  onClick={addClickHandler}></AddCircleIcon>
+    //       </IconButton>
+    //       </Grid>
+          
+    //     <Divider variant="inset" component="li"/>
+        
+        
+        
+    //     <Grid item xs={3}>
+
+    //     <ListItemText
+          
+    //       primary = {`$ ${item.price}`}
+          
+    //       ></ListItemText>
+    //       </Grid>
+    //     <Divider variant="inset" component="li"/>
+    //     <Grid item xs={3}>
+
+    //     <ListItemText
+          
+    //       disableTypography
+          
+          
+    //       primary= {`$ ${item.price * item.qty}`} 
+    //       disableTypography
+          
+          
+          
+    //       ></ListItemText>
+    //       </Grid>
+    //     <Divider variant="inset" component="li"/>
+    //     </ListItem>
+  
         
           
 
 
         
          
-        <Grid item justify='center'>
+        
 
-          <IconButton size='small' edge='end'>
-            <RemoveCircleIcon  onClick={removeClickHandler}></RemoveCircleIcon>
-          </IconButton>
-        </Grid>
-        <Grid item>
+          
+          
+          
+         
+          
 
-        <ListItemText
           
-          primary = {item.qty}
-          
-          
-          
-          
-          ></ListItemText>
-          </Grid>
-          
-          <Grid item>
 
-         <IconButton size='small' edge='end'>
-            <AddCircleIcon  onClick={addClickHandler}></AddCircleIcon>
-          </IconButton>
-          </Grid>
-          
-        <Divider variant="inset" component="li"/>
-        <Grid item>
-
-        <ListItemText
-          
-          primary = {`$ ${item.price}`}
-          disableTypography
-          
-          
-          
-          ></ListItemText>
-          </Grid>
-        <Divider variant="inset" component="li"/>
-        <Grid item>
-
-        <ListItemText
-          
-          primary= {`$ ${item.price * item.qty}`} 
-          disableTypography
-          
-          
-          
-          ></ListItemText>
-          </Grid>
-        <Divider variant="inset" component="li"/>
-        </ListItem>
-  
-
-          </Grid>
+         
 
   )
 }

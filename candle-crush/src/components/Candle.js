@@ -10,16 +10,19 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import {NavLink} from 'react-router-dom'
 
-const Candle = ({candle, clickHandler}) => {
+const Candle = ({candle, clickHandler, unmountFilterContainer}) => {
   
   const useStyles = makeStyles({
     root: {
       width: 225,
-      height: 335,
+      height: 350,
       margin: '1em'
     },
     media: {
       height: 140,
+    },
+    title: {
+      
     }
   });
 
@@ -34,6 +37,7 @@ const Candle = ({candle, clickHandler}) => {
   }
 
   return(
+
     
     <Card className={classes.root} >
       <CardActionArea>
@@ -43,13 +47,13 @@ const Candle = ({candle, clickHandler}) => {
           title={candle.name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography noWrap gutterBottom variant="h5" component="h2">
             {candle.name}
           </Typography>
           <Typography gutterBottom variant="h6" component="h2">
             { `$${candle.price}`}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography noWrap variant="body2" color="textSecondary" component="p">
             Scents: {renderScents()}
           </Typography>
         </CardContent>
@@ -61,7 +65,7 @@ const Candle = ({candle, clickHandler}) => {
           Add to Cart
         </Button>
         <NavLink className="candle-card" to={`/candles/${candle.id}`} >
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={unmountFilterContainer}>
             Learn More
           </Button>
         </NavLink>

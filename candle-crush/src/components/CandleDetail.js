@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import { makeStyles } from '@material-ui/core/styles'
 
 
 
@@ -20,22 +21,31 @@ class CandleDetail extends React.Component {
     review: ""
   }
 
+   
+
+  
   renderReviews = () => {
 
     return this.state.reviews.map(review => {
         return (
-            <ListItem >
+            <div className="review-tile">
+
+            <ListItem alignItems>
+                
                 <ListItemText
-                primary={review.user.username}
-                secondary={review.rating} 
+                primary={`User: ${review.user.username}`}
+                secondary={`Rating: ${review.rating}`} 
                 >
                 </ListItemText>
+                
                     <Divider variant="inset" component="li"/>
-                <ListItemText
-                primary={review.review}
+                <ListItemText className='review-text'
+                primary={`${review.review}`}
+                
                 >
                 </ListItemText>
             </ListItem> 
+                </div>
           )
         })
   }
@@ -45,6 +55,9 @@ class CandleDetail extends React.Component {
   }
 
   componentDidMount() {
+        
+
+
       fetch(`http://localhost:3000/api/v1/candles/${this.props.candle.id}`)
       .then(resp => resp.json())
       .then(data => this.setState({
@@ -115,25 +128,32 @@ class CandleDetail extends React.Component {
 
   render() {
     return (
-      <div>
-        <Grid container justify='flex-start'>
+      <div style={{"margin-top": "5em"}}>
+        <Grid container justify='flex-start' >
           <Grid item xs={3}>
             <h1>{this.props.candle.name}</h1>
             <img className='candle-img' src={this.props.candle.image}/>
           </Grid>
+
           <Grid item xs={9} spacing={5}>
+          <div style={{"margin-top": "2em"}}>
             <p><strong>Bio: </strong> {this.props.candle.description}</p>
             <p><strong>Scent Profile: </strong>{this.renderScents()}</p>
             <p><strong>Price: </strong> $ {this.props.candle.price}</p>
             <p><strong>Left in Stock </strong>{this.props.candle.quantity}</p>
             <Button variant="contained" color="primary" onClick={this.addToCartHandler}>Add to Cart</Button>
+          </div>
           </Grid>
         </Grid>
+        
+        <div id="reviews-list">
+
           <h4>Reviews</h4>
           <h4>Average Rating : {this.getAggregateReview() === 'NaN' ? 0 : this.getAggregateReview()}</h4>
           <List>
               {this.renderReviews()}
           </List>
+        </div>
           <CreateReview changeHandler={this.reviewChangeHandler} submitHandler={this.submitReview} ratingValue={this.state.rating} reviewValue={this.state.review}/>
       </div>
     )
