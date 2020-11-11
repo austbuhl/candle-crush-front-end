@@ -14,7 +14,7 @@ const Profile = (props) =>  {
     <Grid container justify='center'>
       <div>
         <h1>Profile Page</h1>
-        <h4>{props.currentUser.username}</h4>
+        <h3>Username: {props.currentUser.username}</h3>
           
           <List>
             {<Purchases />}

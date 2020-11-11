@@ -16,6 +16,7 @@ const FilterContainer = props => {
       marginBottom: theme.spacing(3),
       padding: theme.spacing(2),
       height: 500,
+      width: 200,
       
       [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
         marginTop: theme.spacing(6),

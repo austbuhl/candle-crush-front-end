@@ -1,13 +1,11 @@
 import React from 'react'
-import {withRouter, BrowserHistory} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import Rating from '@material-ui/lab/Rating'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import { makeStyles } from '@material-ui/core/styles'
 
 
 
@@ -20,9 +18,6 @@ class CandleDetail extends React.Component {
     rating: "",
     review: ""
   }
-
-   
-
   
   renderReviews = () => {
 
@@ -55,9 +50,6 @@ class CandleDetail extends React.Component {
   }
 
   componentDidMount() {
-        
-
-
       fetch(`http://localhost:3000/api/v1/candles/${this.props.candle.id}`)
       .then(resp => resp.json())
       .then(data => this.setState({
@@ -113,7 +105,7 @@ class CandleDetail extends React.Component {
     })
       .then(resp => resp.json())
       .then(newReview => {
-        let updatedReviews = [...this.state.reviews, newReview]
+        // let updatedReviews = [...this.state.reviews, newReview]
         this.setState({
           // reviews: updatedReviews,
           rating: "",
@@ -132,7 +124,7 @@ class CandleDetail extends React.Component {
         <Grid container justify='flex-start' >
           <Grid item xs={3}>
             <h1>{this.props.candle.name}</h1>
-            <img className='candle-img' src={this.props.candle.image}/>
+            <img className='candle-img' alt='candle' src={this.props.candle.image}/>
           </Grid>
 
           <Grid item xs={9} spacing={5}>

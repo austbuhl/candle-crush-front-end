@@ -1,16 +1,7 @@
 import React from 'react'
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-import RemoveIcon from '@material-ui/icons/Remove';
-import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -18,7 +9,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 
-const CartItem = ({item, addToCart, filteredCart, removeFromCart}) => {
+const CartItem = ({item, addToCart, removeFromCart}) => {
 
   const useStyles = makeStyles((theme) => ({
     root: {

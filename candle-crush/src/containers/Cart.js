@@ -1,11 +1,7 @@
 import React from 'react'
 import CartItem from '../components/CartItem'
 import { useHistory } from 'react-router-dom'
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider'
 import Button from '@material-ui/core/Button'
-import ListItem from '@material-ui/core/ListItem';
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
@@ -15,19 +11,6 @@ import Paper from '@material-ui/core/Paper'
 
 const Cart = ({cart, currentUser, addToCart, removeFromCart}) => {
   let history = useHistory()
-
-  // const groupBy = (array, property) => {
-  //   return array.reduce(function(acc, obj) {
-  //     acc.count = 0
-  //     let key = obj[property]
-  //     if(!acc[key]) {
-  //       acc[key] = []
-  //     }
-  //     acc[key].push(obj)
-  //     acc.count = acc[key].length
-  //     return acc
-  //   }, [])
-  // }
 
   const useStyles = makeStyles((theme) => ({
     
@@ -52,7 +35,6 @@ const Cart = ({cart, currentUser, addToCart, removeFromCart}) => {
         padding: theme.spacing(3),
       },
     },
-   
     buttons: {
       display: 'flex',
       justifyContent: 'flex-end',
@@ -62,6 +44,7 @@ const Cart = ({cart, currentUser, addToCart, removeFromCart}) => {
       
     },
   }));
+
   const classes = useStyles()
 
   let cartCopy = cart.map((item) => ({...item, qty: 0}))
@@ -86,11 +69,10 @@ const Cart = ({cart, currentUser, addToCart, removeFromCart}) => {
     return filteredCart.map((item, index) => <CartItem key={index} item={item} removeFromCart={removeFromCart} addToCart={addToCart} />)
   }
   
-  const cartTotals = () => {
-    if (cart.length === 0 ) return [0]
-
-    return cart.map((item) => item.price)
-  }
+  // const cartTotals = () => {
+  //   if (cart.length === 0 ) return [0]
+  //   return cart.map((item) => item.price)
+  // }
   
   const checkoutButton = () => {
     

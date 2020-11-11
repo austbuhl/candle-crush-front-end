@@ -2,7 +2,8 @@ import './App.css';
 import Main from './containers/Main'
 import React from 'react'
 import NavBar from './components/NavBar'
-import {withRouter} from 'react-router-dom'
+import Welcome from './components/Welcome'
+import {withRouter, Route} from 'react-router-dom'
 
 class App extends React.Component {
   state = {
@@ -123,19 +124,23 @@ class App extends React.Component {
   render() {
     return (
       
-        <div className="App">
-          <NavBar currentUser={this.state.currentUser} logoutHandler={this.logoutHandler} cartLength={this.state.cartLength}/>
-          <Main 
-            currentUser={this.state.currentUser} 
-            loginSubmit={this.loginSubmit} 
-            signupSubmit={this.signupSubmit} 
-            inputHandler={this.inputChangeHandler} 
-            username={this.state.username} 
-            password={this.state.password} 
-            user_type={this.state.user_type} 
-            purchases={this.state.purchases}
-            updateCartLength={this.updateCartLength}
-          />
+      <div className="App">
+            <NavBar currentUser={this.state.currentUser} logoutHandler={this.logoutHandler} cartLength={this.state.cartLength}/>
+            <Route exact path='/'>
+              <Welcome />
+            </Route>
+            <Main 
+              style={{background: "red !important"}}
+              currentUser={this.state.currentUser} 
+              loginSubmit={this.loginSubmit} 
+              signupSubmit={this.signupSubmit} 
+              inputHandler={this.inputChangeHandler} 
+              username={this.state.username} 
+              password={this.state.password} 
+              user_type={this.state.user_type} 
+              purchases={this.state.purchases}
+              updateCartLength={this.updateCartLength}
+            />
         </div>
     
   );

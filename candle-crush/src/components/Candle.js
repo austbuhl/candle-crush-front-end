@@ -33,13 +33,13 @@ const Candle = ({candle, clickHandler, unmountFilterContainer}) => {
   }
 
   const renderScents = () => {
-    return candle.scents.map(scent => <span>{`${scent} `}</span>)
+    return candle.scents.map((scent, index) => <span key={index}>{`${scent} `}</span>)
   }
 
   return(
 
     
-    <Card className={classes.root} >
+    <Card className={classes.root} key={candle.id} >
       <CardActionArea>
         <CardMedia
           className={classes.media}

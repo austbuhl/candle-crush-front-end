@@ -7,9 +7,8 @@ import Login from '../components/Login'
 import Profile from '../components/Profile'
 import Signup from '../components/Signup'
 import CreateCandle from '../components/CreateCandle'
-import Grid from '@material-ui/core/Grid'
-import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
-import { unmountComponentAtNode, render} from "react-dom"
+import {Route, Switch, withRouter} from 'react-router-dom'
+
 
 
 
@@ -174,32 +173,21 @@ class Main extends React.Component {
     })
   }
 
-  unmountFilterContainer = () => {
-    // console.log(document.getElementById('filters-container'))
-    unmountComponentAtNode(document.getElementById('filters-container'))
-  }
-  
-
   render(){
   
     return (
-      <div id="main-container" >
-        
+      <div id="main-container">
           <Switch>
             
             <Route path='/candles/create'>
               <CreateCandle name={this.state.name} price={this.state.price} description={this.state.description} image={this.state.image} scent={this.state.scent} changeHandler={this.candleChangeHandler} submitHandler={this.createCandle}/>
             </Route>
-
-            
-
-
             <Route path='/candles' >
               
                 <FilterContainer candles={this.state.candles} scentValue={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
               
               
-                <CandlesContainer unmountFilterContainer={this.unmountFilterContainer} currentUser={this.props.currentUser} clickHandler={this.addToCart} candles={this.filterCandles()} paginate={this.paginate} pages={Math.ceil(this.state.candles.length/this.state.candlesPerPage)} />
+                <CandlesContainer currentUser={this.props.currentUser} clickHandler={this.addToCart} candles={this.filterCandles()} paginate={this.paginate} pages={Math.ceil(this.state.candles.length/this.state.candlesPerPage)} />
               
             </Route>
             
