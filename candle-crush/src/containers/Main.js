@@ -31,9 +31,14 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
+    this.getCandles()
+  }
+
+  getCandles = () => {
     fetch('http://localhost:3000/api/v1/candles')
       .then(resp => resp.json())
       .then(candles => this.setState({candles}))
+      .then(console.log('get to /candles ran succesfully'))
   }
 
   searchBarHandler = (e) => {
@@ -109,6 +114,7 @@ class Main extends React.Component {
     }).then(this.setState({
         cart: []
       }, () => {
+        this.getCandles()
         this.props.updateCartLength(0)
         this.props.history.push('/candles') 
       })
@@ -183,12 +189,8 @@ class Main extends React.Component {
               <CreateCandle name={this.state.name} price={this.state.price} description={this.state.description} image={this.state.image} scent={this.state.scent} changeHandler={this.candleChangeHandler} submitHandler={this.createCandle}/>
             </Route>
             <Route path='/candles' >
-              
                 <FilterContainer candles={this.state.candles} scentValue={this.state.filterScent} searchHandler={this.searchBarHandler} filterScent={this.filterScent} filterPrice={this.filterPrice} filterValue={this.state.filterValue} searchValue={this.state.searchValue}/>
-              
-              
                 <CandlesContainer currentUser={this.props.currentUser} clickHandler={this.addToCart} candles={this.filterCandles()} paginate={this.paginate} pages={Math.ceil(this.state.candles.length/this.state.candlesPerPage)} />
-              
             </Route>
             
             <Route path='/cart'>

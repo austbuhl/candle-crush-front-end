@@ -1,6 +1,6 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
-
+import {withRouter} from 'react-router-dom'
 import PurchaseCard from './PurchaseCard'
 
 
@@ -39,12 +39,10 @@ class Purchases extends React.Component {
                 }
             }).then(resp => resp.json())
             .then(data => {
-                console.log(data)
                 let updatedPurchases = this.state.purchases.filter(purchase => purchase.id !== data.id)
-                console.log(updatedPurchases)
                 this.setState({
                     purchases: updatedPurchases
-                })
+                }, () => this.props.history.push('/candles'))
             })
             
         }
@@ -59,4 +57,4 @@ class Purchases extends React.Component {
       }
 }
 
-export default Purchases
+export default withRouter(Purchases)

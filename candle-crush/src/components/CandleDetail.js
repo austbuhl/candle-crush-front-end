@@ -25,7 +25,7 @@ class CandleDetail extends React.Component {
         return (
             <div className="review-tile">
 
-            <ListItem alignItems>
+            <ListItem >
                 
                 <ListItemText
                 primary={`User: ${review.user.username}`}
@@ -33,10 +33,9 @@ class CandleDetail extends React.Component {
                 >
                 </ListItemText>
                 
-                    <Divider variant="inset" component="li"/>
+                <Divider variant="inset" component="li"/>
                 <ListItemText className='review-text'
-                primary={`${review.review}`}
-                
+                primary={`${review.review.slice(0, 150)}...`}
                 >
                 </ListItemText>
             </ListItem> 
