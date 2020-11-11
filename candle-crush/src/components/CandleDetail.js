@@ -137,7 +137,7 @@ class CandleDetail extends React.Component {
           <p>{this.props.candle.quantity}</p>
           <Button variant="contained" color="primary" onClick={this.addToCartHandler}>Add to Cart</Button>
         </Grid>
-    </Grid>
+        </Grid>
           <h4>Reviews</h4>
           <h4>Average Rating : {this.getAggregateReview() === 'NaN' ? 0 : this.getAggregateReview()}</h4>
           <List>
